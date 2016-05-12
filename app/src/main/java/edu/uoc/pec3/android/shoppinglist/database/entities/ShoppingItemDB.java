@@ -61,10 +61,14 @@ public class ShoppingItemDB {
      * @return ShoppingItem array
      */
     public ArrayList<ShoppingItem> getAllItems() {
+        // Init target array
         ArrayList<ShoppingItem> shoppingItems = new ArrayList<>();
 
+        // Get database for read data
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+        // Query
         String sql = "SELECT * FROM " + ShoppingElementEntry.TABLE_NAME;
+        // Init cursor
         Cursor cursor = db.rawQuery(sql, null);
 
         if (cursor.moveToFirst()){
@@ -85,7 +89,9 @@ public class ShoppingItemDB {
      * Method to clear all the elements
      */
     public void clearAllItems() {
+        // Init database for write
         SQLiteDatabase db = dbHelper.getWritableDatabase();
+        // Query
         String sql = "DELETE FROM " + ShoppingElementEntry.TABLE_NAME;
         db.execSQL(sql);
         db.close();
@@ -97,7 +103,9 @@ public class ShoppingItemDB {
      * @param shoppingItem
      */
     public void updateItem(ShoppingItem shoppingItem) {
+        // Init database for write
         SQLiteDatabase db = dbHelper.getWritableDatabase();
+        // Query
         String sql = "UPDATE " + ShoppingElementEntry.TABLE_NAME
                 + " SET " + ShoppingElementEntry.COLUMN_NAME_TITLE + " = '" + shoppingItem.getName() + "'"
                 + " WHERE " + ShoppingElementEntry._ID + " = " + shoppingItem.getId();
@@ -111,7 +119,9 @@ public class ShoppingItemDB {
      * @param shoppingItem
      */
     public void deleteItem(ShoppingItem shoppingItem) {
+        // Init database for write
         SQLiteDatabase db = dbHelper.getWritableDatabase();
+        // Query
         String sql = "DELETE FROM " + ShoppingElementEntry.TABLE_NAME + " WHERE " + ShoppingElementEntry._ID + " = " + shoppingItem.getId();
         db.execSQL(sql);
         db.close();
